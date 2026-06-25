@@ -164,10 +164,6 @@ unsigned CD_Output::ComputeMakespan() const
 
 
 // LB1 (Critical Path Outbound) e LB4 (Critical Path Inbound)
-// Calcolano il tempo vitale di un singolo camion, dal momento in cui arriva al momento 
-// in cui l'ultima cassa è stata caricata, ignorando tutti gli altri camion.
-// Se un camion arriva al minuto 120 e ci mette 30 minuti a scaricare, 
-// è impossibile finire prima di 150, anche se hai porte infinite.
 
 unsigned CD_Output::ComputeLowerBound() const
 {
@@ -212,10 +208,7 @@ unsigned CD_Output::ComputeLowerBound() const
 }
 
 
-// ComputeAverageWaits — calcola il tempo medio di attesa nel piazzale
-// per i camion inbound (attesa prima di accedere a una porta di scarico)
-// e per i camion outbound (attesa prima di accedere a una porta di carico).
-// Restituisce (avg_wait_in, avg_wait_out) in minuti.
+// ComputeAverageWaits
 
 pair<double, double> CD_Output::ComputeAverageWaits() const
 {

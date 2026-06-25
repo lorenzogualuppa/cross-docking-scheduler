@@ -113,9 +113,6 @@ void CD_Output::Reset()
   fill(outbound_door.begin(), outbound_door.end(), 0);
 }
 
-// ComputeGoodsReadyFromCurrentInbound - Centralizza il calcolo dei tempi di
-// disponibilità delle merci, simulando il lato inbound usando le porte assegnate.
-// Solo le coppie (i,j) con transfer_time > 0 contribuiscono.
 vector<unsigned> CD_Output::ComputeGoodsReadyFromCurrentInbound() const
 {
   vector<unsigned> finish_unload(in.InboundTrucks(), 0);
@@ -151,8 +148,6 @@ vector<unsigned> CD_Output::ComputeGoodsReadyFromCurrentInbound() const
 }
 
 
-// ComputeMakespan — valuta la soluzione già costruita.
-// Usa sequenze e porte decise dal Solver.
 unsigned CD_Output::ComputeMakespan() const
 {
   vector<unsigned> goods_ready = ComputeGoodsReadyFromCurrentInbound();
@@ -175,10 +170,6 @@ unsigned CD_Output::ComputeMakespan() const
 }
 
 // LB1 (Critical Path Outbound) e LB4 (Critical Path Inbound)
-// A cosa servono: Calcolano il tempo vitale di un singolo camion, 
-// dal momento in cui arriva al momento in cui l'ultima cassa è stata caricata, ignorando tutti gli altri camion.
-// Quando servono: Negli scenari Uniform e Sparse. Se un camion arriva al minuto 120 e ci mette 30 minuti a scaricare, 
-// è impossibile finire prima di 150, anche se hai porte infinite. In questi scenari, LB1 e LB4 sono i "re" e dettano il limite.
 
 unsigned CD_Output::ComputeLowerBound() const
 {
